@@ -6,6 +6,20 @@
         <element id="directory" name="classes">
           <element id="module-output" name="crawlers" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-grizzly:1.19.4" />
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-servlet:1.19.4" />
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-server:1.19.4" />
+          <element id="library" level="project" name="Maven: com.sun.jersey:jersey-core:1.19.4" />
+          <element id="library" level="project" name="Maven: javax.ws.rs:jsr311-api:1.1.1" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-context:4.3.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-expression:4.3.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-core:4.3.9.RELEASE" />
+          <element id="library" level="project" name="Maven: commons-logging:commons-logging:1.2" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.3.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.9.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-aop:4.3.9.RELEASE" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/crawlers/META-INF/MANIFEST.MF" />
