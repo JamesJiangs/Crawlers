@@ -1,5 +1,7 @@
 package com.sms.proxy;
 
+import com.sms.entity.Crawler;
+
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
@@ -11,19 +13,18 @@ import java.net.URL;
  */
 public class HttpProxy {
 
+
     /**
-     * 创建代理
-     * @param url 网页链接
-     * @param host
-     * @param port
-     * @return HttpURLConnection
+     *
+     * @param crawler
+     * @return
      */
-    public HttpURLConnection createconnection(String url,String host,int port){
+    public HttpURLConnection createconnection(Crawler crawler){
 
         HttpURLConnection httpURLConnection=null;
         try {
-
-            httpURLConnection= (HttpURLConnection) new URL(url).openConnection(new Proxy(Proxy.Type.HTTP,new InetSocketAddress(host,port)));
+            httpURLConnection= (HttpURLConnection) new URL(crawler.getUrlStr())
+                    .openConnection(new Proxy(Proxy.Type.HTTP,new InetSocketAddress(crawler.getHost(),crawler.getPort())));
             httpURLConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) ...");
             httpURLConnection.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
         } catch (IOException e) {
@@ -45,23 +46,24 @@ public class HttpProxy {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         switch (stautsCode){
             case HttpURLConnection.HTTP_OK:
-                System.out.println("连接正常......");
+                System.out.println(stautsCode+"：连接正常......");
                 return true;
             case HttpURLConnection.HTTP_NOT_FOUND:
-                System.out.println("找不到资源！");
+                System.out.println(stautsCode+"：找不到资源！");
                 return false;
             case HttpURLConnection.HTTP_INTERNAL_ERROR:
-                System.out.println("服务器发生错误！");
+                System.out.println(stautsCode+"：服务器发生错误！");
                 return false;
             case HttpURLConnection.HTTP_NOT_MODIFIED:
-                System.out.println("请求资源未更新！");
+                System.out.println(stautsCode+"：请求资源未更新！");
                 return false;
             case HttpURLConnection.HTTP_UNAUTHORIZED:
-                System.out.println("未授权！");
+                System.out.println(stautsCode+"：未授权！");
                 return false;
+            case HttpURLConnection.HTTP_BAD_REQUEST:
+                System.out.println(stautsCode+"：非法请求！");
         }
         System.out.println("请求失败！");
         return false;

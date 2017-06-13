@@ -1,5 +1,6 @@
 package com.sms.save.toLocal;
 
+import com.sms.entity.Crawler;
 import com.sms.proxy.HttpProxy;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,24 +16,19 @@ import java.util.List;
  * Created by james.jiang on 2017/6/13.
  */
 public class SaveImage {
-    /**代理IP*/
-    private String host;
-    /**端口*/
-    private int port;
+
+    private Crawler crawler;
     /**文件名*/
     private String html;
-    /**存储路径*/
-    private String location;
+
     /**图片url集合*/
     private List<String> listImageSrc;
     /**图片名称集合*/
     private List<String> listImageName;
 
 
-    public SaveImage(String host, int port, String location, List<String> listImageSrc, List<String> listImageName, String html) {
-        this.host = host;
-        this.port = port;
-        this.location = location;
+    public SaveImage(Crawler crawler, List<String> listImageSrc, List<String> listImageName, String html) {
+        this.crawler=crawler;
         this.listImageSrc = listImageSrc;
         this.listImageName = listImageName;
         this.html=html;
@@ -54,7 +50,7 @@ public class SaveImage {
      * @return  目录路径
      */
     private String makeDir(){
-        File file=new File(location+"/"+this.getName());
+        File file=new File(crawler.getLocation()+"/"+this.getName());
         if(!file.exists()){
             boolean mkdir = file.mkdir();
             if(!mkdir){
@@ -78,7 +74,7 @@ public class SaveImage {
 
                 HttpProxy httpProxyss=new HttpProxy();
 
-                HttpURLConnection httpURLConnections=httpProxyss.createconnection("",host,port);
+                HttpURLConnection httpURLConnections=httpProxyss.createconnection(crawler);
                 InputStream inputStream=httpURLConnections.getInputStream();
 
                 OutputStream outputStream=new FileOutputStream(new File(this.makeDir(),imageName));

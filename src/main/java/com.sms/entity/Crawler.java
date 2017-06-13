@@ -9,6 +9,15 @@ public class Crawler {
     private String host;
     private int port;
 
+    public Crawler(){}
+
+    public Crawler(String host,int port,String urlStr,String location){
+        this.host=host;
+        this.port=port;
+        this.location=location;
+        this.urlStr=urlStr;
+    }
+
     public String getUrlStr() {
         return urlStr;
     }
