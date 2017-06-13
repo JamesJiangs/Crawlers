@@ -14,7 +14,7 @@ import java.util.Queue;
  *
  */
 public class ImageController {
-    public void download(Queue<String> queue, Crawler crawler){
+    public synchronized void download(Queue<String> queue, Crawler crawler){
 
         //       循环获取集合中的Url，html下载到本地
         for (String urlStr2:

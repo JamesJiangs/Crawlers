@@ -5,7 +5,6 @@ import com.sms.proxy.HttpProxy;
 import com.sms.store.UrlStore;
 
 import java.net.HttpURLConnection;
-import java.util.Queue;
 
 /**
  * Created by james.jiang on 2017/6/12.
@@ -15,7 +14,7 @@ import java.util.Queue;
 public class Test {
 
     public static void main(String[] args) {
-        Crawler crawler=new Crawler("111.23.10.33",8080,"http://www.zol.com.cn/","E:\\HttpProxy\\downloadFile");
+        Crawler crawler=new Crawler("111.23.10.33",8080,"http://www.tiexue.net/","E:\\HttpProxy\\downloadFile");
 
         UrlStore urlStore=new UrlStore();
 
@@ -25,16 +24,18 @@ public class Test {
         boolean isConn=httpProxy.isConnection(urlConnection);
 
         if (isConn){
-
-
             System.out.println("代理成功！");
+
+            Thread thread=new Thread();
+            thread.start();
+
+
 
             UrlCollect urlCollect=new UrlCollect();
             UrlStore urlStore1=urlCollect.collectUrl(crawler,urlStore);
 
-            Queue<String> queue=urlStore1.getStore();
 
-           new ImageController().download(urlStore1.getStore(),crawler);
+          new HtmlController().download(urlStore1.getStore(),crawler);
 
         }else {
             System.out.println("代理失败！");
@@ -42,4 +43,6 @@ public class Test {
 
 
     }
+
+
 }

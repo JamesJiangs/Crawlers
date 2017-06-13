@@ -15,7 +15,7 @@ public class DownLoadHtml {
 
         InputStream inputStream= null;
         BufferedReader bufferedReader=null;
-        String formartCode="utf-8";
+        String formartCode="gb2312";
         StringBuilder res=null;
         try {
             inputStream = httpURLConnection.getInputStream();
