@@ -8,6 +8,7 @@ public class Crawler {
     private String location;
     private String host;
     private int port;
+    private String formatCode;
 
     public Crawler(){}
 
@@ -16,6 +17,14 @@ public class Crawler {
         this.port=port;
         this.location=location;
         this.urlStr=urlStr;
+    }
+
+    public Crawler(String host,int port,String urlStr,String location,String formatCode){
+        this.host=host;
+        this.port=port;
+        this.location=location;
+        this.urlStr=urlStr;
+        this.formatCode=formatCode;
     }
 
     public String getUrlStr() {
@@ -48,5 +57,13 @@ public class Crawler {
 
     public void setHost(String host) {
         this.host = host;
+    }
+
+    public String getFormatCode() {
+        return formatCode;
+    }
+
+    public void setFormatCode(String formatCode) {
+        this.formatCode = formatCode;
     }
 }

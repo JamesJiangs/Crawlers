@@ -1,31 +1,57 @@
 package com.sms.controller;
 
 import com.sms.entity.Crawler;
+import com.sms.proxy.HttpConn;
 import com.sms.proxy.HttpProxy;
 import com.sms.save.download.DownLoadHtml;
 import com.sms.save.toLocal.SaveHtml;
-
-import java.net.HttpURLConnection;
-import java.util.Queue;
+import com.sms.store.LoadDate;
+import com.sms.store.NormData;
+import com.sms.store.PareDate;
+import com.sms.store.StoreBase;
 
 /**
  * Created by james.jiang on 2017/6/13.
  */
 public class HtmlController {
 
-    public synchronized void download(Queue<String> queue, Crawler crawler){
-        //       循环获取集合中的Url，html下载到本地
-        for (String urlStr2:
-                queue) {
-            if (urlStr2!=null){
-                System.out.println(urlStr2);
-                DownLoadHtml downLoadHtml=new DownLoadHtml();
-                HttpURLConnection urlConnection1= new HttpProxy().createconnection(crawler);
+    public void download(StoreBase storeBase, PareDate pareDate, Crawler crawler){
 
-                SaveHtml saveHtml=new SaveHtml(crawler.getLocation(),downLoadHtml.downloadHtml(urlConnection1),urlStr2);
-                saveHtml.save();
+        LoadDate loadDate=storeBase.getLoadDate();
+        NormData normData=storeBase.getNormData();
+        HttpConn httpConn=new HttpConn();
+        DownLoadHtml downLoadHtml=new DownLoadHtml();
+        HttpProxy httpProxy=new HttpProxy();
+        Boolean flag=true;
 
+        while (flag){
+
+            String url;
+            if ((url=loadDate.getUrl())!=null){
+
+                if (!normData.isUse(url)){
+                    pareDate.add(url);
+                }
+
+            }else {
+                flag=false;
             }
+
+        }
+
+        for (String url:
+             pareDate.getQueue()) {
+            crawler.setUrlStr(url);
+            if (httpConn.test(crawler)){
+                System.out.println(url);
+                String htmlStr=downLoadHtml.downloadHtml(httpProxy.createconnection(crawler));
+                SaveHtml saveHtml=new SaveHtml(crawler.getLocation(),htmlStr,crawler.getUrlStr());
+                saveHtml.save();
+                normData.setTrue(url);
+            }else {
+                continue;
+            }
+
         }
 
     }

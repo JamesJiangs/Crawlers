@@ -24,7 +24,7 @@ public class HtmlParseUrl {
 
         for (Element element:
                 elements) {
-            //连接
+
             String link=element.attr("href");
 
             if(link.matches("[a-zA-z]+://[^\\s]*") && link.contains(this.getDomainForUrl(urlStr))

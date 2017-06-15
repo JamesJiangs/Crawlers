@@ -4,50 +4,54 @@ import com.sms.entity.Crawler;
 import com.sms.parser.HtmlParseUrl;
 import com.sms.proxy.HttpProxy;
 import com.sms.save.download.DownLoadHtml;
-import com.sms.store.UrlStore;
+import com.sms.store.LoadDate;
+import com.sms.store.NormData;
+import com.sms.store.StoreBase;
 
-import java.net.HttpURLConnection;
 import java.util.List;
 
 /**
  * Created by james.jiang on 2017/6/13.
+ *
  */
 public class UrlCollect {
 
-    public UrlStore collectUrl(Crawler crawler, UrlStore urlStore){
+    public StoreBase collectUrl(Crawler crawler){
+        LoadDate loadDate=new LoadDate();
+        NormData normData=new NormData();
 
-//        判断urlStore中是否包含url,如果不包含就执行
-        if (!urlStore.isRepetition(crawler.getUrlStr())){
-            HttpProxy httpProxy=new HttpProxy();
-            HttpURLConnection urlConnection=httpProxy.createconnection(crawler);
+        StoreBase storeBase=new StoreBase();
 
-            boolean isConn=httpProxy.isConnection(urlConnection);
-            if (isConn){
+        HttpProxy httpProxy=new HttpProxy();
+        DownLoadHtml downLoadHtml=new DownLoadHtml();
 
-                List<String> firstPageUrl= new HtmlParseUrl().crawLinksFromHtml(new DownLoadHtml().downloadHtml(urlConnection),crawler.getUrlStr());
+        HtmlParseUrl htmlParseUrl=new HtmlParseUrl();
 
-                for (String link:
-                        firstPageUrl) {
+       Boolean flag=true;
 
-                    if (!urlStore.isRepetition(link)){
+       if (normData.getHashMap().isEmpty()){
 
-                        urlStore.addHashMap(link);
-                        urlStore.addQueue(link);
-                    }
-                }
+           String html=downLoadHtml.downloadHtml(httpProxy.createconnection(crawler));
+           List<String> list=htmlParseUrl.crawLinksFromHtml(html,crawler.getUrlStr());
 
-        }else {
-//                String urlStr=urlStore.getStore().peek();
-//                if (urlStore.isContains(urlStr)){
-//                    crawler.setUrlStr(urlStr);
-//                    urlStore.hasBeUsed(urlStr);
-//                }
-            }
+           for (String url:
+                list) {
 
-        }else {
-            System.out.println("连接失败！");
-        }
+               if (!normData.isContain(url)){
+                     System.out.println(url);
 
-        return urlStore;
+                     loadDate.add(url);
+                       normData.add(url);
+               }
+
+           }
+
+       }
+
+        storeBase.setLoadDate(loadDate);
+        storeBase.setNormData(normData);
+        return storeBase;
     }
+
+
 }
