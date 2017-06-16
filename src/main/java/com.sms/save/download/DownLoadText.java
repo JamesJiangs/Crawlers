@@ -4,6 +4,7 @@ import org.jsoup.Jsoup;
 
 /**
  * Created by james.jiang on 2017/6/13.
+ * 下载文本
  */
 public class DownLoadText {
     /**文件名*/

@@ -2,6 +2,7 @@ package com.sms.entity;
 
 /**
  * Created by james.jiang on 2017/6/12.
+ * 相关输入信息实体
  */
 public class Crawler {
     private String urlStr;

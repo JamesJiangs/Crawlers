@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 /**
  * Created by james.jiang on 2017/6/14.
+ * 用于判断是否存在和是否被使用过的HashMap
  */
 public class NormData{
 

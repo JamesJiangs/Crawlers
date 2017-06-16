@@ -10,6 +10,7 @@ import java.util.List;
 
 /**
  * Created by james.jiang on 2017/6/13.
+ * 下载图片
  */
 public class DownLoadImage {
 

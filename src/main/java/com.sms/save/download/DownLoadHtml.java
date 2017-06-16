@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 
 /**
  * Created by james.jiang on 2017/6/13.
+ * 下载html转为字符串
  */
 public class DownLoadHtml {
 

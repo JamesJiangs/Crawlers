@@ -7,6 +7,7 @@ import java.io.IOException;
 
 /**
  * Created by james.jiang on 2017/6/13.
+ * 存储文本到本地
  */
 public class SaveText {
     /**网页文本信息*/

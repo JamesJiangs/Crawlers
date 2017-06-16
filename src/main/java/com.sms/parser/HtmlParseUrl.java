@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 
 /**
  * Created by james.jiang on 2017/6/12.
+ * 爬取页面的URl
  */
 public class HtmlParseUrl {
 

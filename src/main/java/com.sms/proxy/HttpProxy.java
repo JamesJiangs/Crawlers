@@ -10,6 +10,7 @@ import java.net.URL;
 
 /**
  * Created by james.jiang on 2017/6/12.
+ * 模拟浏览器代理
  */
 public class HttpProxy {
 

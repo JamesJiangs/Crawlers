@@ -5,6 +5,7 @@ import java.util.Queue;
 
 /**
  * Created by james.jiang on 2017/6/14.
+ * 存储url的队列
  */
 public class LoadDate implements RepoDate{
     private Queue<String> queue;

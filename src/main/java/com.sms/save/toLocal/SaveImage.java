@@ -14,6 +14,7 @@ import java.util.List;
 
 /**
  * Created by james.jiang on 2017/6/13.
+ * 存储图片到本地
  */
 public class SaveImage {
 
