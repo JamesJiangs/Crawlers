@@ -30,6 +30,7 @@ public class DownLoadHtml {
 
         } catch (IOException e) {
             e.printStackTrace();
+
         }finally {
             try {
                 if(bufferedReader!=null){

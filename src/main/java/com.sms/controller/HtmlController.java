@@ -12,6 +12,7 @@ import com.sms.store.StoreBase;
 
 /**
  * Created by james.jiang on 2017/6/13.
+ *
  */
 public class HtmlController {
 
@@ -44,7 +45,8 @@ public class HtmlController {
             crawler.setUrlStr(url);
             if (httpConn.test(crawler)){
                 System.out.println(url);
-                String htmlStr=downLoadHtml.downloadHtml(httpProxy.createconnection(crawler));
+                String htmlStr;
+                if ((htmlStr=downLoadHtml.downloadHtml(httpProxy.createconnection(crawler)))==null)continue;
                 SaveHtml saveHtml=new SaveHtml(crawler.getLocation(),htmlStr,crawler.getUrlStr());
                 saveHtml.save();
                 normData.setTrue(url);
